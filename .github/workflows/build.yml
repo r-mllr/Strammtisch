@@ -42,6 +42,9 @@ jobs:
       with:
         ruby-version: 2.7.1
 
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v1.4.3
+
     - name: Bundle install
       run: |
         bundle config path vendor/bundle
@@ -51,11 +54,18 @@ jobs:
       env:
         RAILS_ENV: test
         DATABASE_URL: postgresql://postgres:postgres@localhost:5432/Strammtisch_test
-      run: bundle exec rails db:create
+      run: bundle exec rails db:setup
+
+    - name: Create webpack
+      env:
+        RAILS_ENV: test
+      run: |
+        bundle exec rails webpacker:install
+        bundle exec rails webpacker:compile
 
     - name: Run tests
       env:
         RAILS_ENV: test
         DATABASE_URL: postgresql://postgres:postgres@localhost:5432/Strammtisch_test
-      run: bundle exec rails test
+      run: bundle exec rails spec
         
