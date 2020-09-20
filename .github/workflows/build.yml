@@ -1,0 +1,47 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: Build and Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: setup-rbenv
+      uses: masa-iwasaki/setup-rbenv@1.1.1
+    - name: Set up Ruby
+      run: rbenv install 2.7.1
+    - name: Setup PostgreSQL
+      uses: Harmon758/postgresql-action@v1.0.0
+      with:
+        # Version of PostgreSQL to use
+        postgresql version: 12
+        # POSTGRES_DB - name for the default database that is created
+        postgresql db: Strammtisch_test
+        # POSTGRES_USER - create the specified user with superuser power
+        postgresql user: postgres
+        # POSTGRES_PASSWORD - superuser password
+        postgresql password: postgres
+    - name: Install dependencies
+      run: bundle install
+    - name: Create test DB
+      env:
+        RAILS_ENV: test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+      run: bundle exec rails db:create
+    - name: Run tests
+      run: bundle exec rails test
