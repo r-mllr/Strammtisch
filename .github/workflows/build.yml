@@ -15,7 +15,7 @@ on:
 
 jobs:
   test:
-    runs-on: ruby:2.7.1-alpine
+    runs-on: ubuntu-latest
     
     services:
       postgres:
@@ -36,6 +36,11 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-gems-
+
+    - name: Setup Ruby, JRuby and TruffleRuby
+      uses: ruby/setup-ruby@v1.46.0
+      with:
+        ruby-version: 2.7.1
 
     - name: Bundle install
       run: |
