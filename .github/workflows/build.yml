@@ -21,9 +21,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: setup-rbenv
-      uses: masa-iwasaki/setup-rbenv@1.1.1
-    - name: Set up Ruby
-      run: rbenv install 2.7.1
+      uses: masa-iwasaki/setup-rbenv@1.2.0
+    - name: Install Ruby
+      run: |
+        eval "$(rbenv init -)"
+        rbenv install -s `cat .ruby-version` # or specify the version you want
+    - name: Install dependencies
+      run: |
+        eval "$(rbenv init -)"
+        bundle install --path vendor/bundle
     - name: Setup PostgreSQL
       uses: Harmon758/postgresql-action@v1.0.0
       with:
@@ -35,8 +41,6 @@ jobs:
         postgresql user: postgres
         # POSTGRES_PASSWORD - superuser password
         postgresql password: postgres
-    - name: Install dependencies
-      run: bundle install
     - name: Create test DB
       env:
         RAILS_ENV: test
