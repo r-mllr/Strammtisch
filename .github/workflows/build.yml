@@ -15,7 +15,8 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ruby-2.7.1
+    
     services:
       postgres:
         image: postgres:12
@@ -36,17 +37,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gems-
 
-    - name: setup-rbenv
-      uses: masa-iwasaki/setup-rbenv@1.2.0
-
-    - name: Install Ruby
-      run: |
-        eval "$(rbenv init -)"
-        rbenv install -s `cat .ruby-version` # or specify the version you want
-
     - name: Bundle install
       run: |
-        eval "$(rbenv init -)"
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
 
@@ -54,14 +46,11 @@ jobs:
       env:
         RAILS_ENV: test
         DATABASE_URL: postgresql://postgres:postgres@localhost:5432/Strammtisch_test
-      run: |
-        eval "$(rbenv init -)"
-        bundle exec rails db:create
+      run: bundle exec rails db:create
 
     - name: Run tests
       env:
         RAILS_ENV: test
         DATABASE_URL: postgresql://postgres:postgres@localhost:5432/Strammtisch_test
-      run: |
-        eval "$(rbenv init -)"
-        bundle exec rails test
+      run: bundle exec rails test
+        
