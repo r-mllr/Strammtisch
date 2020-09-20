@@ -15,7 +15,7 @@ on:
 
 jobs:
   test:
-    runs-on: ruby-2.7.1
+    runs-on: ruby:2.7.1-alpine
     
     services:
       postgres:
