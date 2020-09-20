@@ -10,9 +10,19 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
+    <!--
+      bulma notifications 
+    <!-- -->
+    <div class="notification is-info">
+      <button class="delete"></button>
+      <%= notice %>
+    </div>
+    
+    <div class="notification is-danger">
+      <button class="delete"></button>
+      <%= alert %>
+    </div>
+   
     <%= yield %>
   </body>
 </html>
