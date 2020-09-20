@@ -59,7 +59,9 @@ jobs:
     - name: Create webpack
       env:
         RAILS_ENV: test
-      run: bundle exec rails webpacker:compile
+      run: |
+        bundle exec rails webpacker:install
+        bundle exec rails webpacker:compile
 
     - name: Run tests
       env:
