@@ -67,3 +67,6 @@ gem 'bulma-rails', '~> 0.9.0'
 
 # Authentication
 gem 'devise'
+
+# Administration
+gem "administrate"
