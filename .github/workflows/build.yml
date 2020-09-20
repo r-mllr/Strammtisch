@@ -16,6 +16,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    
     services:
       postgres:
         image: postgres:12
@@ -28,24 +29,33 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: setup-rbenv
-      uses: masa-iwasaki/setup-rbenv@1.2.0
-    - name: Install Ruby
+
+    - uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    - name: Setup Ruby, JRuby and TruffleRuby
+      uses: ruby/setup-ruby@v1.46.0
+      with:
+        ruby-version: 2.7.1
+
+    - name: Bundle install
       run: |
-        eval "$(rbenv init -)"
-        rbenv install -s `cat .ruby-version` # or specify the version you want
-    - name: Install dependencies
-      run: |
-        eval "$(rbenv init -)"
-        bundle install --path vendor/bundle
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+
     - name: Create test DB
       env:
         RAILS_ENV: test
-        DATABASE_URL: postgresql://postgres:postgres@postgres:5432/Strammtisch_test
-      run: |
-        eval "$(rbenv init -)"
-        bundle exec rails db:create
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/Strammtisch_test
+      run: bundle exec rails db:create
+
     - name: Run tests
-      run: |
-        eval "$(rbenv init -)"
-        bundle exec rails test
+      env:
+        RAILS_ENV: test
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/Strammtisch_test
+      run: bundle exec rails test
+        
