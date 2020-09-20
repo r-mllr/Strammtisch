@@ -41,7 +41,7 @@ jobs:
     - name: Create test DB
       env:
         RAILS_ENV: test
-        DATABASE_URL: postgresql://postgres:postgres@postgres:5432/Strammtisch_test
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/Strammtisch_test
       run: |
         eval "$(rbenv init -)"
         bundle exec rails db:create
