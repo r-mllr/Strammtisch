@@ -58,3 +58,6 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # lightweight css framework based on flexbox
 gem 'bulma-rails', '~> 0.9.0'
+
+# Authentication
+gem 'devise'
