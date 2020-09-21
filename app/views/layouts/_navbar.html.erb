@@ -1,0 +1,71 @@
+<%= javascript_pack_tag 'navbar' %>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <%= link_to  root_path, class: "navbar-item" do %>
+      <strong>
+        <%= Rails.application.class.parent.to_s %>
+      </strong>
+    <% end %>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar_strammtisch">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a> 
+  </div>
+
+  <div id="navbar_strammtisch" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item">
+        Events
+      </a>
+
+      <a class="navbar-item">
+        User
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            About
+          </a>
+          <a class="navbar-item">
+            Jobs
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Report an issue
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <% if user_signed_in? %>
+          Logged in as &nbsp; <em><%= current_user.email %>.</em>
+          <div class="buttons">
+            <%= link_to 'Edit profile', edit_user_registration_path, class: "button is-alert" %>
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "button is-danger" %>
+          </div>
+        <% else %>
+          <div class="buttons">
+            <%= link_to new_user_registration_path, class: "button is-primary" do %>
+              <strong>Sign up</strong>
+            <% end %>
+            <%= link_to new_user_session_path, class: "button is-light" do %>
+              Log in
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
