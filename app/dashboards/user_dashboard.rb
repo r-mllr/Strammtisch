@@ -25,6 +25,7 @@ class UserDashboard < Administrate::BaseDashboard
     locked_at: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    admin: Field::Boolean
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -37,6 +38,7 @@ class UserDashboard < Administrate::BaseDashboard
   confirmed_at
   locked_at
   created_at
+  admin
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -44,6 +46,7 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
   id
   email
+  admin
   reset_password_sent_at
   confirmed_at
   confirmation_sent_at
@@ -62,6 +65,7 @@ class UserDashboard < Administrate::BaseDashboard
   confirmed_at
   password
   password_confirmation
+  admin
   ].freeze
 
   # COLLECTION_FILTERS
