@@ -10,18 +10,20 @@
   </head>
 
   <body>
-    <!--
-      bulma notifications 
-    <!-- -->
-    <div class="notification is-info">
-      <button class="delete"></button>
-      <%= notice %>
-    </div>
+    <!-- bulma notifications -->
+    <% if notice.present? %>
+      <div class="notification is-info">
+        <button class="delete"></button>
+        <%= notice %>
+      </div>
+    <% end %>
     
-    <div class="notification is-danger">
-      <button class="delete"></button>
-      <%= alert %>
-    </div>
+    <% if alert.present? %>
+      <div class="notification is-danger">
+        <button class="delete"></button>
+        <%= alert %>
+      </div>
+    <% end %>
    
     <%= yield %>
   </body>
