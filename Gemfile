@@ -69,4 +69,4 @@ gem 'bulma-rails', '~> 0.9.0'
 gem 'devise'
 
 # Administration
-gem "administrate"
+gem 'administrate'

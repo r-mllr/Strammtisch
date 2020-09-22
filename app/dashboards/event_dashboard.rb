@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class EventDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -12,7 +12,7 @@ class EventDashboard < Administrate::BaseDashboard
     name: Field::String,
     takes_place_at: Field::DateTime,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -21,28 +21,28 @@ class EventDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  id
-  name
-  takes_place_at
-  created_at
+    id
+    name
+    takes_place_at
+    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  id
-  name
-  takes_place_at
-  created_at
-  updated_at
+    id
+    name
+    takes_place_at
+    created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  name
-  takes_place_at
+    name
+    takes_place_at
   ].freeze
 
   # COLLECTION_FILTERS

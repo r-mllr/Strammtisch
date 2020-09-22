@@ -2,11 +2,11 @@
 
 Rails.application.routes.draw do
   namespace :admin do
-      resources :users
-      resources :events
+    resources :users
+    resources :events
 
-      root to: "users#index"
-    end
+    root to: 'users#index'
+  end
   devise_for :users
   get 'pages/home'
 
