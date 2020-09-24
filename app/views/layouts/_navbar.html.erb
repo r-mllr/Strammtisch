@@ -4,7 +4,7 @@
   <div class="navbar-brand">
     <%= link_to  root_path, class: "navbar-item" do %>
       <strong>
-        <%= Rails.application.class.parent.to_s %>
+        <%= Rails.application.class.module_parent.to_s %>
       </strong>
     <% end %>
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar_strammtisch">
