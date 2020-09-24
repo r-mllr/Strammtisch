@@ -21,6 +21,12 @@
     <%= form.datetime_select :takes_place_at %>
   </div>
 
+
+  <div class="field">
+    <%= form.label :user_ids %>
+    <%= form.collection_select :user_ids, User.all, :id, :name, {selected: event.users.pluck(:id)}, {multiple: true} %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

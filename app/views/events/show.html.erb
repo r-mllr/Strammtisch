@@ -10,5 +10,10 @@
   <%= @event.takes_place_at %>
 </p>
 
+<p>
+  <strong>Users</strong>
+  <%= @event.users.pluck(:name).join(", ") %>
+</p>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
