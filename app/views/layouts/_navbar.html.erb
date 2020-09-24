@@ -43,6 +43,10 @@
           </a>
         </div>
       </div>
+
+      <% if user_signed_in? and current_user.admin?%>
+        <%=link_to "Admin Area", admin_root_path, class: "navbar-item" %>
+      <%end%>
     </div>
 
     <div class="navbar-end">
