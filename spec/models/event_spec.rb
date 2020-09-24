@@ -44,4 +44,33 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+
+  context 'associations' do
+    describe 'with users' do
+      let(:event){FactoryBot.create(:event)}
+
+      it "has many users" do
+        expect(event.users.size).to eq 0
+        event.users << FactoryBot.create(:user)
+        event.users << FactoryBot.create(:user)
+        event.users << FactoryBot.create(:user)
+
+        expect(event.users.size).to eq 3 
+      end
+
+      it "has only unique users" do
+        user1 = FactoryBot.create(:user)
+
+        expect(event.users.size).to eq 0
+
+        event.users << user1
+        expect {
+          event.users << user1
+        }.to raise_error ActiveRecord::RecordNotUnique
+
+        expect(event.users).to include(user1)
+        expect(event.users.size).to be 1
+      end
+    end
+  end
 end
