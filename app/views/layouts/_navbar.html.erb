@@ -50,7 +50,7 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <% if user_signed_in? %>
-          Logged in as &nbsp; <em><%= current_user.email %>.</em>
+          Logged in as &nbsp; <em><%= current_user.name %>.</em>
           <div class="buttons">
             <%= link_to 'Edit profile', edit_user_registration_path, class: "button is-alert" %>
             <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "button is-danger" %>
