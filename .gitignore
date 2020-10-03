@@ -78,3 +78,6 @@ yarn-debug.log*
 
 # Ignore Rubymine stuff
 /.idea
+
+# Ignore vim stuff
+.*.swp
